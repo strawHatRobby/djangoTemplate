@@ -1,7 +1,7 @@
 language: python
 python: "3.5.1"
-# env:
-#   - DJANGO=django==1.8
+env:
+  - DJANGO=django==1.8
 before_install:
   - "sudo apt-get update"
   - "sudo apt-get install xvfb"
@@ -9,9 +9,10 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
-  - sudo python manage.py runserver &
 install: 
   - pip install -r dev-requirements.txt behave-django django-behave
-  # - pip install $DJANGO
+  - pip install $DJANGO
 # command to run tests
-script: behave
+script: 
+  - sudo python manage.py runserver &
+  - behave
