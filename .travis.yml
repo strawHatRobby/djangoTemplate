@@ -12,7 +12,12 @@ before_script:
 install: 
   - pip install -r dev-requirements.txt behave-django django-behave
   - pip install $DJANGO
+  - pip install coveralls
 # command to run tests
 script: 
-  - sudo python manage.py runserver &
-  - behave
+  - pip install $DJANGO
+  - coverage sudo python manage.py runserver &
+  - coverage behave
+
+after_script:
+  coverall
